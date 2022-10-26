@@ -1,10 +1,10 @@
 #include "WiFi.h"
 #include "PubSubClient.h" //pio lib install "knolleary/PubSubClient"
+//ping  -4 rpi-mqtt.local
+#define SSID          "NETGEAR68"
+#define PWD           "excitedtuba713"
 
-#define SSID          "Techtile"
-#define PWD           "Techtile229"
-
-#define MQTT_SERVER   "10.128.48.25"
+#define MQTT_SERVER   "52.28.129.241"
 #define MQTT_PORT     1883
 
 #define LED_PIN       2
@@ -66,7 +66,7 @@ void callback(char *topic, byte *message, unsigned int length)
 
   // If a message is received on the topic esp32/output, you check if the message is either "on" or "off".
   // Changes the output state according to the message
-  if (String(topic) == "esp32/output")
+  if (String(topic) == "nieuwpoort/tags")//ontvangen
   {
     Serial.print("Changing output to ");
     if (messageTemp == "on")
@@ -91,11 +91,11 @@ void reconnect()
     // Attempt to connect
     // creat unique client ID
     // in Mosquitto broker enable anom. access
-    if (client.connect("ESP8266Client"))
+    if (client.connect("<tekiezennaam>"))
     {
       Serial.println("connected");
       // Subscribe
-      client.subscribe("esp32/output");
+      client.subscribe("nieuwpoort/paswoord");
     }
     else
     {
